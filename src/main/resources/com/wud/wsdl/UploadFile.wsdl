@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:ups="http://www.example.org/UploadFile/mtom/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UploadFile"
+	targetNamespace="http://www.example.org/UploadFile/mtom/service"
+	xmlns:fut="http://www.example.org/UploadFile/mtom/types">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.example.org/UploadFile/mtom/service">
+			<xsd:import namespace="http://www.example.org/UploadFile/mtom/types"
+				schemaLocation="../xsd/FileUpload.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="UploadService_upload">
+		<wsdl:part element="fut:InputRequest" name="request" />
+	</wsdl:message>
+	<wsdl:message name="UploadService_uploadResponse">
+		<wsdl:part element="fut:UploadResponse" name="response" />
+	</wsdl:message>
+	<wsdl:portType name="UploadService">
+		<wsdl:operation name="upload">
+			<wsdl:input message="ups:UploadService_upload" />
+			<wsdl:output message="ups:UploadService_uploadResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="UploadServiceSOAPBinding" type="ups:UploadService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="upload">
+			<soap:operation
+				soapAction="http://www.example.org/UploadFile/mtom/service/upload" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UploadFile">
+		<wsdl:port binding="ups:UploadServiceSOAPBinding" name="UploadServiceSOAPPort">
+			<soap:address
+				location="http://localhost:8080/WebserviceUploadData/service/upload/UploadService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,22 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/UploadFile/mtom/types"
+	xmlns:fut="http://www.example.org/UploadFile/mtom/types" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	elementFormDefault="qualified">
+	<xsd:element name="InputRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="fileType" type="xsd:string" />
+				<xsd:element name="filePath" type="xsd:string" />
+				<xsd:element name="file" type="xsd:base64Binary"
+					xmime:expectedContentTypes="application/octet-stream" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UploadResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
